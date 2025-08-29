@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ceratron | Advanced Ceramic Substrates</title>
+  <style>
+    :root { --brand:#0b2a55; --accent:#18a558; --ink:#2b2f36; --muted:#6b7785; --bg:#f5f7fa; --card:#ffffff; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; color:var(--ink); background:var(--bg); }
+    a { color: var(--brand); text-decoration: none; }
+    /* Navbar */
+    .nav { position: sticky; top:0; z-index: 100; background: #fff; box-shadow: 0 4px 14px rgba(0,0,0,.06); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 10px 16px; display:flex; align-items:center; gap:16px; }
+    .nav .logo { height: 36px; width: 36px; border-radius: 8px; overflow:hidden; display:flex; align-items:center; justify-content:center; background:#fff; }
+    .nav .logo img { height: 100%; width:100%; object-fit:contain; }
+    .nav .brand { font-weight: 700; letter-spacing: .3px; color:var(--brand); }
+    .nav .links { margin-left: auto; display:flex; gap: 14px; }
+    .nav .links a { padding: 8px 10px; border-radius:8px; color: var(--ink); }
+    .nav .links a.active, .nav .links a:hover { background:#e8f0ff; color:#093864; }
+    /* Hero */
+    .hero { background: linear-gradient(180deg, rgba(11,42,85,.08), rgba(0,0,0,.0)); }
+    .hero-inner { max-width: 1200px; margin: 0 auto; padding: 28px 16px 18px; display:flex; align-items:center; gap: 16px; flex-wrap: wrap; }
+    .hero .text { flex: 1 1 420px; }
+    .hero h1 { margin: 8px 0; font-size: 32px; color: var(--brand); }
+    .hero p { margin: 0; color: var(--muted); line-height: 1.6; }
+    .hero .banner { flex: 1 1 420px; display:flex; justify-content:center; }
+    .hero .banner img { width: 100%; max-width: 560px; border-radius: 12px; background:#e9eef5; }
+    /* Section */
+    .section { max-width: 1200px; margin: 0 auto; padding: 26px 16px; }
+    .section h2 { margin: 0 0 12px; font-size: 24px; color: var(--brand); }
+    .subtle { color: var(--muted); margin-top: 4px; }
+    /* About stats */
+    .about-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    @media (max-width:700px){ .about-grid{ grid-template-columns:1fr; } }
+    .about-card { background: var(--accent); color:#fff; border-radius: 12px; padding: 22px; display:flex; align-items:center; justify-content: space-around; gap: 16px; }
+    .about-cell { text-align:center; }
+    .num { font-size: 36px; font-weight: 800; line-height:1; }
+    .label { font-size: 14px; opacity: .95; }
+    /* Certifications */
+    .certs-grid { display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    @media (max-width:900px){ .certs-grid { grid-template-columns:1fr 1fr; } }
+    @media (max-width:600px){ .certs-grid { grid-template-columns:1fr; } }
+    .cert-card { background: #fff; border-radius: 12px; padding: 16px 18px; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+    .cert-card h3 { margin: 0 0 8px; font-size: 16px; color: var(--brand); }
+    .cert-card ul { margin:0; padding-left: 18px; }
+    .cert-card li { margin: 6px 0; }
+    /* Advantages */
+    .adv-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    @media (max-width:1100px){ .adv-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width:600px){ .adv-grid { grid-template-columns: 1fr; } }
+    .adv { background:#fff; border-radius: 12px; padding: 16px; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+    .adv h3 { margin: 0 0 8px; color: var(--brand); font-size: 16px; }
+    .adv p { margin: 0; color: var(--muted); }
+    /* Grid cards */
+    .grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    @media (max-width:900px){ .grid { grid-template-columns: 1fr; } }
+    .card { background: #fff; border-radius: 12px; overflow:hidden; box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+    .card img { width:100%; height: 240px; object-fit: cover; background:#e9eef5; }
+    .card-body { padding: 16px; }
+    .card h3 { margin: 0 0 8px; color: var(--brand); }
+    .meta { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+    .btn { display:inline-block; padding: 10px 14px; border-radius: 8px; background: var(--brand); color:#fff; text-decoration:none; }
+    .btn:hover { background:#093864; }
+    /* Product detail sections */
+    .product { margin-top: 18px; background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+    .product header { text-align: center; background: #000; padding: 12px; border-radius: 10px; }
+    .product header img { max-width: 100%; border-radius: 8px; }
+    .specs { overflow-x:auto; }
+    table { width:100%; border-collapse: collapse; margin-top: 12px; }
+    th, td { border: 1px solid #e1e6ef; padding: 10px; text-align:left; }
+    th { background: #0b2a55; color:#fff; }
+    ul { margin: 6px 0 0 18px; }
+    /* Capabilities */
+    .cap-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    @media (max-width:1000px){ .cap-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width:640px){ .cap-grid { grid-template-columns: 1fr; } }
+    .cap.card { padding: 16px; }
+    .cap h3 { margin: 0 0 6px; color: var(--brand); font-size: 16px; }
+    .cap p { margin: 0; color: var(--muted); }
+    /* Industries */
+    .ind-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    @media (max-width:1100px){ .ind-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width:600px){ .ind-grid { grid-template-columns: 1fr; } }
+    .ind { background:#fff; border-radius: 12px; padding: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+    .ind h4 { margin: 0 0 6px; color: var(--brand); }
+    /* Contact */
+    .contact { display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+    @media (max-width:800px){ .contact{ grid-template-columns:1fr; } }
+    .contact .box { background:#fff; border-radius:12px; padding:16px; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+    /* Footer */
+    footer { margin-top: 20px; background:#0a213f; color:#cfe3ff; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 14px 16px; display:flex; gap:10px; justify-content: space-between; flex-wrap:wrap; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="logo"><img src="images/logo.png" alt="Ceratron"></div>
+      <div class="brand">Ceratron</div>
+      <div class="links">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#advantages">Advantages</a>
+        <a href="#products">Products</a>
+        <a href="#partners">Partners</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-inner">
+      <div class="text">
+        <h1>Advanced Ceramic Substrates</h1>
+        <p>Ceratron is a wholly-owned subsidiary of <strong>Shandong Sinocera Functional Materials Co., Ltd.</strong>, a publicly listed company and national leader in advanced ceramic materials.</p>
+        <p>Ceratron is China’s first and largest vertically integrated ceramic substrate manufacturer, and the first in the industry to achieve full environmental compliance certification.</p>
+      </div>
+      <div class="banner">
+        <img src="images/logo.png" alt="Ceratron Company">
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <h2>About Ceratron</h2>
+    <p class="subtle">Backed by Sinocera Group • Vertically integrated • Full environmental compliance</p>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-cell">
+          <div class="num">2017</div>
+          <div class="label">Year Founded</div>
+        </div>
+        <div class="about-cell">
+          <div class="num">Tongling</div>
+          <div class="label">Headquarters</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="about-cell">
+          <div class="num">60+</div>
+          <div class="label">Patents</div>
+        </div>
+        <div class="about-cell">
+          <div class="num">200+</div>
+          <div class="label">Employees</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" style="padding-left:0;padding-right:0;">
+      <h2 style="margin-top:8px;">Certifications &amp; Compliance</h2>
+      <div class="certs-grid">
+        <div class="cert-card">
+          <h3>Core Certifications</h3>
+          <ul>
+            <li><strong>ISO 9001</strong>: Quality management</li>
+            <li><strong>IATF 16949</strong>: Automotive quality</li>
+            <li><strong>GJB 9001</strong>: Military quality system</li>
+          </ul>
+        </div>
+        <div class="cert-card">
+          <h3>Environmental Compliance</h3>
+          <ul>
+            <li><strong>ISO 14001</strong></li>
+          </ul>
+        </div>
+        <div class="cert-card">
+          <h3>Occupational Security</h3>
+          <ul>
+            <li><strong>ISO 45001</strong></li>
+            <li><strong>ISO 27001</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADVANTAGES -->
+  <section id="advantages" class="section">
+    <h2>Key Advantages</h2>
+    <p class="subtle">Technology • Capacity • Quality • Delivery</p>
+    <div class="adv-grid">
+      <div class="adv">
+        <h3>Advanced Metallization</h3>
+        <p>DPC, ENEPIG, NiPdAu processes for LEDs, lasers and power devices.</p>
+      </div>
+      <div class="adv">
+        <h3>Scalable Capacity</h3>
+        <p>200k panels/month today; target 600k/month with phase‑II expansion.</p>
+      </div>
+      <div class="adv">
+        <h3>Stringent Quality</h3>
+        <p>ISO 9001 / IATF 16949 / GJB 9001; PPAP and traceability on request.</p>
+      </div>
+      <div class="adv">
+        <h3>On‑Time Delivery</h3>
+        <p>Optimized flow and cycle time; stable lead times for mass production.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section id="capabilities" class="section">
+    <h2>Manufacturing Capabilities</h2>
+    <p class="subtle">Key processes and measurable performance</p>
+    <div class="cap-grid">
+      <div class="cap card">
+        <h3>Laser Drilling</h3>
+        <p>±20 μm positional accuracy; via diameter control: ±10 μm</p>
+      </div>
+      <div class="cap card">
+        <h3>Photolithography Alignment</h3>
+        <p>15 μm accuracy; ≤30 μm front-to-back registration; exposure depth up to 300 μm</p>
+      </div>
+      <div class="cap card">
+        <h3>Etching Resolution</h3>
+        <p>Line spacing down to 90 μm, tolerance ±15 μm; vertical profile: 90° ±15°</p>
+      </div>
+      <div class="cap card">
+        <h3>CNC Polishing</h3>
+        <p>Ensures surface flatness across large-area panels</p>
+      </div>
+      <div class="cap card">
+        <h3>NiPdAu Plating</h3>
+        <p>Film thickness monitored with CPK ≥ 1.67</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="section">
+    <h2>Products</h2>
+    <p class="subtle">LED Substrates • Ceramic‑Metal Components • TEC • Laser Heat Sinks</p>
+
+    <!-- Gallery cards -->
+    <div class="grid" style="margin-top:12px;">
+      <div class="card">
+        <img src="images/led-substrate.jpg" alt="LED Substrates">
+        <div class="card-body">
+          <h3>LED Substrates</h3>
+          <div class="meta">Al₂O₃ / AlN • 0.15–0.635 mm • Min. 15 μm</div>
+          <a class="btn" href="#p-led">View details</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="images/ceramic-metal.jpg" alt="Ceramic‑Metal Components">
+        <div class="card-body">
+          <h3>Ceramic‑Metal Components</h3>
+          <div class="meta">Height ≤ 1 mm • Hermetic sealing • Custom shapes</div>
+          <a class="btn" href="#p-cmp">View details</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="images/tec.jpg" alt="TEC">
+        <div class="card-body">
+          <h3>TEC (Thermoelectric Cooler)</h3>
+          <div class="meta">AlN base • Cu uniformity ±5 μm • Laser solder stop</div>
+          <a class="btn" href="#p-tec">View details</a>
+        </div>
+      </div>
+      <div class="card">
+        <img src="images/laser-heat-sink.jpg" alt="Laser Heat Sinks">
+        <div class="card-body">
+          <h3>Laser Heat Sinks</h3>
+          <div class="meta">Ra &lt; 0.1 μm • Stable COS • Customizable design</div>
+          <a class="btn" href="#p-laser">View details</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detail: LED Substrates -->
+    <div id="p-led" class="product">
+      <header><img src="images/led-substrate.jpg" alt="LED Substrates"></header>
+      <div class="specs">
+        <h3>LED Substrates | Specifications</h3>
+        <table>
+          <tr><th>Item</th><th>Description</th><th>Specifications</th></tr>
+          <tr><td>Substrate Material</td><td>Al₂O₃ / AlN / Glass</td><td>-</td></tr>
+          <tr><td>Thickness (mm)</td><td>Substrate thickness</td><td>0.15 / 0.25 / 0.38 / 0.50 / 0.635</td></tr>
+          <tr><td>Dimension (inch)</td><td>Substrate size</td><td>3×3 / 4×4 / 4.5×4.5 / 4.8×4.8</td></tr>
+          <tr><td>Metal Type</td><td>Single-layer: Cu/Ni/Au/Ag <br> Multi-layer: Cu–Ag, Cu–Ni–Au, Cu–Ni–Ag <br> Customized alloy</td><td>-</td></tr>
+          <tr><td>Total Metal Thickness (μm)</td><td>Plating thickness</td><td>1–200 (customizable)</td></tr>
+          <tr><td>Pattern Construction</td><td>Single-sided <br> Double-sided with vias <br> Customized</td><td>-</td></tr>
+          <tr><td>Resolution</td><td>Line width</td><td>Min. 15 μm</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Detail: Ceramic-Metal Components -->
+    <div id="p-cmp" class="product">
+      <header><img src="images/ceramic-metal.jpg" alt="Ceramic-Metal Components"></header>
+      <h3>Ceramic-Metal Components</h3>
+      <p><strong>Specifications:</strong> 60–1000 μm</p>
+      <p><strong>Applications:</strong></p>
+      <ul>
+        <li>Microcontrollers</li>
+        <li>Video controllers</li>
+        <li>SAW / filters</li>
+        <li>Logic circuits & memory</li>
+        <li>Integrated amplifiers</li>
+      </ul>
+      <p><strong>Features:</strong></p>
+      <ul>
+        <li>Innovation based on dam-type products enables ceramic-metal components</li>
+        <li>Higher pattern precision and customizable shapes vs. metal bases</li>
+        <li>Height up to 1 mm; supports metal pillar growth for routing & soldering</li>
+        <li>Hermetic sealing, leakage &lt; 1×10⁻⁹ Pa·m³/s</li>
+      </ul>
+    </div>
+
+    <!-- Detail: TEC -->
+    <div id="p-tec" class="product">
+      <header><img src="images/tec.jpg" alt="TEC"></header>
+      <h3>TEC (Thermoelectric Cooler)</h3>
+      <p><strong>Specifications:</strong> 1–20 μm</p>
+      <p><strong>Applications:</strong></p>
+      <ul>
+        <li>Optical communication / temperature control</li>
+        <li>Optoelectronic devices / heat dissipation</li>
+        <li>Insulation boxes</li>
+        <li>Thermoelectric refrigerators</li>
+        <li>Power generation (ΔT)</li>
+      </ul>
+      <p><strong>Features:</strong></p>
+      <ul>
+        <li>Optimized process, shorter cycle time, mass production ready</li>
+        <li>Ultra-thin AlN substrate (0.15 mm), Cu uniformity ±5 μm</li>
+        <li>Fully wrapped sidewall metallization for reliability</li>
+        <li>Laser solder-stop technology, efficient and reliable</li>
+        <li>Selective gold thickening for soldering &amp; wire bonding</li>
+      </ul>
+    </div>
+
+    <!-- Detail: Laser Heat Sinks -->
+    <div id="p-laser" class="product">
+      <header><img src="images/laser-heat-sink.jpg" alt="Laser Heat Sinks"></header>
+      <h3>Laser Heat Sinks</h3>
+      <p><strong>Specifications:</strong> 1–20 μm</p>
+      <p><strong>Applications:</strong></p>
+      <ul>
+        <li>Industrial lasers</li>
+        <li>Optical communication</li>
+        <li>LiDAR</li>
+      </ul>
+      <p><strong>Features:</strong></p>
+      <ul>
+        <li>Optimized process, shorter cycle time, mass production ready</li>
+        <li>Ultra-thin AlN substrate (0.15 mm), Cu uniformity ±5 μm</li>
+        <li>Stable COS polarization &amp; thermal management</li>
+        <li>Flatness &amp; roughness Ra &lt; 0.1 μm</li>
+        <li>Customizable designs</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="section" id="industries">
+    <h2>Industries Served</h2>
+    <div class="ind-grid">
+      <div class="ind"><h4>LED Lighting</h4><p>High-brightness substrates with excellent reliability and thermal performance.</p></div>
+      <div class="ind"><h4>Laser Systems</h4><p>Ceramic substrates for industrial, medical and LiDAR lasers.</p></div>
+      <div class="ind"><h4>Power Devices</h4><p>High-performance ceramic substrates designed for power electronics and modules.</p></div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section class="section" id="partners">
+    <h2>Trusted Customers</h2>
+    <p class="subtle">Replace placeholders with approved customer logos.</p>
+    <div style="background:#fff; border-radius:12px; padding:18px; display:flex; gap:18px; align-items:center; flex-wrap:wrap; box-shadow:0 4px 12px rgba(0,0,0,.06);">
+      <img src="images/partner1.png" alt="Partner 1" style="height:60px; padding:10px; background:#e9eef5; border-radius:8px;">
+      <img src="images/partner2.png" alt="Partner 2" style="height:60px; padding:10px; background:#e9eef5; border-radius:8px;">
+      <img src="images/partner3.png" alt="Partner 3" style="height:60px; padding:10px; background:#e9eef5; border-radius:8px;">
+      <img src="images/partner4.png" alt="Partner 4" style="height:60px; padding:10px; background:#e9eef5; border-radius:8px;">
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <div class="contact">
+      <div class="box">
+        <h3>Sales</h3>
+        <p>Email: <a href="mailto:wenjing_wu@ceratron.com">wenjing_wu@ceratron.com</a><br/>
+           Tel: +86 156-5235-9821</p>
+        <p>Address: No. 3129, Tianmenshan North Road, Tongling Economic and Technological Development Zone, Anhui Province</p>
+      </div>
+      <div class="box">
+        <h3>Message</h3>
+        <p>Share your requirements — we will respond within three business days.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Ceratron. All rights reserved.</div>
+      <div>ISO 9001 • IATF 16949 • GJB 9001 • ISO 14001 • ISO 45001 • ISO 27001</div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Active nav on scroll
+    const ids = ['home','about','advantages','products','partners','contact'];
+    const sections = ids.map(id => document.getElementById(id));
+    const links = Array.from(document.querySelectorAll('.nav .links a'));
+    const onScroll = () => {
+      let current = 'home';
+      sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if (top <= 80) current = sec.id;
+      });
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>
